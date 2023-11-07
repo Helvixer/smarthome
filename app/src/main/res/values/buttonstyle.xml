@@ -10,9 +10,20 @@
         <item name="colorPrimary">@color/redbut</item>
         <item name="cornerRadius">12dp</item>
     </style>
+    <style name="very_redbtn"
+        parent="Widget.AppCompat.Button">
+        <item name="background">@color/very_red_but</item>
+        <item name="colorPrimary">@color/very_red_but</item>
+        <item name="cornerRadius">12dp</item>
+    </style>
     <style name="black_btn"
         parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimary">@color/blackbut</item>
+        <item name="cornerRadius">12dp</item>
+    </style>
+    <style name="blue_btn"
+        parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/bluebut</item>
         <item name="cornerRadius">12dp</item>
     </style>
     <style name="code_btn"

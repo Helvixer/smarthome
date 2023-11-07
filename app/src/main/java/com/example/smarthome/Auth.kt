@@ -15,4 +15,9 @@ class Auth : AppCompatActivity() {
         val intentn = Intent(this, CreateCode::class.java)
         startActivity(intentn)
     }
+
+    fun register(view: View) {
+        val intentn = Intent(this, Register::class.java)
+        startActivity(intentn)
+    }
 }

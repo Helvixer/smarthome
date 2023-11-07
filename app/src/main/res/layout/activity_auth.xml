@@ -97,7 +97,8 @@
             android:textSize="45px"
             android:theme="@style/black_btn"
             android:textColor="@color/white"
-            android:fontFamily="@font/montserrat_bold"/>
+            android:fontFamily="@font/montserrat_bold"
+            android:onClick="register"/>
 
     </LinearLayout>
 
