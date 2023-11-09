@@ -1,5 +1,6 @@
 package com.example.smarthome
 
+import android.content.Intent
 import android.health.connect.datatypes.units.Length
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,6 +13,7 @@ import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.gotrue.GoTrue
 import io.github.jan.supabase.gotrue.gotrue
 import io.github.jan.supabase.gotrue.providers.builtin.Email
+import io.github.jan.supabase.gotrue.user.UserSession
 import io.github.jan.supabase.postgrest.Postgrest
 import kotlinx.coroutines.*
 import io.github.jan.supabase.postgrest.postgrest
@@ -19,77 +21,70 @@ import io.ktor.util.sha1
 
 class Register : AppCompatActivity() {
 
-    val appCon = this
-    val client = SupaClient().getClient()
+    val SB = SBobj.getClient1()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        lifecycleScope.launch {
-            //val client = SupaClient().getClient()
-            client.gotrue.loginWith(Email) {
-                email = "test1@mail.ru"//email_e
-                password = "123456"//pass
-            }
-            Log.e("!!", client.toString())
-
-//            SupaClient().client.gotrue.logout()
-            var user = client.gotrue.retrieveUserForCurrentSession(updateSession = false)
-
-            Log.e("!!!!!!", user.email.toString())
-            //Log.e("!!!!!!", user2.email.toString())
-/*            val client = createSupabaseClient(
-                supabaseUrl = "https://sqrerppgkdgwjqprutgz.supabase.co",
-
-                supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNxcmVycHBna2Rnd2pxcHJ1dGd6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTU3MjM5NTAsImV4cCI6MjAxMTI5OTk1MH0.5THfzTq00a32NMZiC-Hqt0KNWlBNBQi1wRjxXZmsLKs"
-            ) {
-                install(GoTrue)
-                install(Postgrest)
-                //install other modules
-            }
-            val user2 = client.gotrue.loginWith(Email) {
-                email = "test1@mail.ru"//email_e
-                password = "123456"//pass
-            }
-
-//            SupaClient().client.gotrue.logout()
-            var user = client.gotrue.retrieveUserForCurrentSession(updateSession = false)
-            Log.e("!!!!!!", user.email.toString())*/
-
-
-        }
     }
+    /*fun test_pars(view: View){
+        lifecycleScope.launch {
+            lifecycleScope.launch {
+                SB.gotrue.loginWith(Email) {
+                    email = "test1@mail.ru"//email_e
+                    password = "123456"//pass
+                }
+                var user = SB.gotrue.retrieveUserForCurrentSession(updateSession = false)
+                if(user == null){
+                    Toast.makeText(applicationContext, "Произошла ошибка", Toast.LENGTH_SHORT).show()
+                }
+                Toast.makeText(applicationContext, "Зареган", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }*/
 
     fun register(view: View) {
         val email_e : String = findViewById<EditText?>(R.id.email_edit).text.toString();
         val username : String = findViewById<EditText?>(R.id.login_edit).text.toString();
         val pass : String = findViewById<EditText?>(R.id.pass_edit).text.toString();
-/*
+
         val emailPattern : Regex = Regex("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")
         if(email_e == "" || username == "" || pass == "" || !email_e.matches(emailPattern) || pass.length < 6){
             Toast.makeText(this, "Проверьте правильность введенных данных!", Toast.LENGTH_SHORT).show()
             return
         }
-*/
-
-        lifecycleScope.launch {
-/*            val user2 = SupaClient().client.gotrue.loginWith(Email) {
-                email = "test1@mail.ru"//email_e
-                password = "123456"//pass
+        val toast: Toast = Toast.makeText(this, "1", Toast.LENGTH_SHORT)
+        val code = Intent(this, CreateCode::class.java)
+        try {
+            lifecycleScope.launch {
+                try {
+                    SB.gotrue.signUpWith(Email) {
+                        email = email_e
+                        password = pass
+                    }
+                    var user = SB.gotrue.retrieveUserForCurrentSession(updateSession = false)
+                    if (user == null) {
+                        toast.setText("Произошла ошибка")
+                        toast.show()
+                        return@launch
+                    }
+                    SB.postgrest["user"].insert(User(user.id, username, null))
+                    val sPref = getSharedPreferences("login", MODE_PRIVATE).edit()
+                    sPref.putString("email", email_e)
+                    sPref.putString("pass", pass)
+                    sPref.apply()
+                    // Toast.makeText(applicationContext, "Зареган", Toast.LENGTH_SHORT).show()
+                    toast.setText("Зареган")
+                    toast.show()
+                    startActivity(code)
+                }catch (_:Exception){
+                    toast.setText("Данный E-Mail уже зарегестрирован")
+                    toast.show()
+                }
             }
-
-            SupaClient().client.gotrue.retrieveUserForCurrentSession(updateSession = false)
-            Log.e("!12", user2.toString())
-
-            val us = SupaClient().client.gotrue.retrieveUserForCurrentSession()
-            Log.e("!12", us.email.toString())
-
-
-
-           if(user == null){
-                Toast.makeText(applicationContext, "Произошла ошибка", Toast.LENGTH_SHORT).show()
-            }
-            SupaClient().client.postgrest["user"].insert(User(user.id, username, null))
-            Toast.makeText(applicationContext, "Зареган", Toast.LENGTH_SHORT).show()*/
+        }catch (_: Exception){
+            toast.setText("Произошла ошибка")
+            toast.show()
         }
+
     }
 }
