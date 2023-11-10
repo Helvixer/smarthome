@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
+import com.example.smarthome.utils.SBobj
+import com.example.smarthome.utils.UserMethods
 import io.github.jan.supabase.gotrue.gotrue
 import io.github.jan.supabase.gotrue.providers.builtin.Email
 import kotlinx.coroutines.launch
@@ -17,27 +19,28 @@ class splashscreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splashscreen)
         val sPref = getSharedPreferences("login", MODE_PRIVATE)
+        var res : Boolean = false
+        val MainA = Intent(applicationContext, LoginCode::class.java)
         //sPref.edit().putString("email", "blabla").apply()
         //sPref.edit().remove("email").apply()
-        val test : String? = sPref.getString("email", "")
-        if (test != "") {
+        val mail : String? = sPref.getString("email", "")
+        if (mail != "") {
             lifecycleScope.launch {
-                SBobj.getClient1().gotrue.loginWith(Email){
-                    email = sPref.getString("email", "").toString()
-                    password = sPref.getString("pass", "").toString()
-                }
+                UserMethods().Auth(mail.toString(), sPref.getString("pass", "").toString())
+                startActivity(MainA)
                 Log.e("TESTLOG", SBobj.getClient1().gotrue.retrieveUserForCurrentSession().email.toString())
+                finish()
             }
         }else{
-            Log.e("TEST!1", "null")
-        }
-        val timer = object: CountDownTimer(3000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {}
-            override fun onFinish() {
-                val MainA = Intent(applicationContext, Auth::class.java)
-                startActivity(MainA)
+            val timer = object: CountDownTimer(3000, 1000) {
+                override fun onTick(millisUntilFinished: Long) {}
+                override fun onFinish() {
+                    val MainB = Intent(applicationContext, Auth::class.java)
+                    startActivity(MainB)
+                    finish()
+                }
             }
+            timer.start()
         }
-        timer.start()
     }
 }

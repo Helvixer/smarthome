@@ -6,10 +6,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import com.example.smarthome.utils.UserMethods
+import kotlinx.coroutines.launch
 
 class CreateCode : AppCompatActivity() {
     var password = ""
-    var a = 0
+    //var a = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,11 +41,21 @@ class CreateCode : AppCompatActivity() {
 
     fun setPassword(num : Int){
         password += num
-        Toast.makeText(this, password, Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, password, Toast.LENGTH_SHORT).show()
         if(password.length == 4){
+            val sPref = getSharedPreferences("login", MODE_PRIVATE).edit()
+            UserMethods().saveCode(sPref, password)
             val add = Intent(this, AddAdress::class.java)
-            startActivity(add)
-            finish()
+            val main = Intent(this, MainScreen::class.java)
+            lifecycleScope.launch {
+                if(UserMethods().getHome() == null){
+                    startActivity(add)
+                    finish()
+                }else{
+                    startActivity(main)
+                    finish()
+                }
+            }
         }
         when(password.length){
             1 -> findViewById<ImageView>(R.id.dot_0).setImageResource(R.drawable.dot_1)

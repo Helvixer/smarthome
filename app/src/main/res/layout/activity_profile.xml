@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
-        android:clickable="true"
+        android:onClick="back"
         android:focusable="true"/>
     <TextView
         android:id="@+id/profile_txt"
@@ -100,7 +100,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/montserrat_bold"
-            android:id="@+id/pass_edit"
+            android:id="@+id/adress_edit"
             android:layout_width="330dp"
             android:layout_height="50dp"
             android:hint="Адрес"/>
@@ -130,6 +130,7 @@
             android:layout_width="160dp"
             android:layout_height="60dp"
             android:text="Выйти"
+            android:onClick="exit"
             android:theme="@style/very_redbtn"
             app:cornerRadius="12dp"
             android:textSize="17sp" />

@@ -24,10 +24,11 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="55dp"/>
     <TextView
+        android:id="@+id/main_adress"
         android:layout_below="@+id/yourhome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="г. Омск, ул. Ленина, д. 24"
+        android:text="Загрузка данных...."
         android:fontFamily="@font/montserrat_bold"
         android:textSize="12sp"
         android:textColor="#94949B"
@@ -38,6 +39,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@drawable/btn_settings"
+        android:onClick="setting"
         android:layout_alignParentEnd="true"/>
 
 

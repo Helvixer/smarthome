@@ -41,6 +41,7 @@
         android:theme="@style/blue_btn"
         app:cornerRadius="12dp"
         android:textSize="17sp"
+        android:onClick="addHome1"
         android:layout_marginBottom="80dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true" />

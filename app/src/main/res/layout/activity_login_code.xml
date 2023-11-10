@@ -194,6 +194,7 @@
             android:layout_gravity="center_horizontal"
             app:cornerRadius="12dp"
             android:text="Выйти"
+            android:onClick="exit"
             android:fontFamily="@font/montserrat_bold"
             android:theme="@style/black_btn"
             android:layout_marginTop="50dp"/>

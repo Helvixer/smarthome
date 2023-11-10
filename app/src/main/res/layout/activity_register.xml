@@ -111,7 +111,7 @@
             android:layout_marginTop="20dp"
             android:layout_width="270dp"
             android:layout_height="55dp"
-            android:onClick="test_pars"
+            android:onClick="LOGIN"
             android:text="Войти"
             android:textSize="45px"
             android:theme="@style/black_btn"
