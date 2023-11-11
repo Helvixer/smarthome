@@ -44,4 +44,13 @@ class Profile : AppCompatActivity() {
             finish()
         }
     }
+
+    fun save(view: View) {
+        val mail = findViewById<EditText>(R.id.email_edit).text.toString()
+        val uname = findViewById<EditText>(R.id.login_edit).text.toString()
+        val adress = findViewById<EditText>(R.id.adress_edit).text.toString()
+        lifecycleScope.launch {
+            UserMethods().changeProfile(mail, uname, adress)
+        }
+    }
 }

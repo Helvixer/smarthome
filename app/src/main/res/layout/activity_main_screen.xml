@@ -7,12 +7,13 @@
     tools:context=".MainScreen">
 
     <LinearLayout
+        android:id="@+id/kostyl"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:background="@color/blackbut"
         android:orientation="vertical">
-
     </LinearLayout>
+
     <TextView
         android:id="@+id/yourhome"
         android:layout_width="wrap_content"
@@ -41,6 +42,21 @@
         android:src="@drawable/btn_settings"
         android:onClick="setting"
         android:layout_alignParentEnd="true"/>
-
+    <ImageView
+        android:layout_marginBottom="40dp"
+        android:layout_marginEnd="20dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/btn_plus"
+        android:onClick="setting"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@+id/kostyl"
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        />
 
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.example.smarthome.utils
 
 import android.content.SharedPreferences
+import android.util.Log
 import com.example.smarthome.dataClasses.Home
 import com.example.smarthome.dataClasses.HomeInsert
 import com.example.smarthome.dataClasses.UserInsert
@@ -75,6 +76,29 @@ class UserMethods {
         }catch (_:Exception){
             null
         }
+    }
+
+    suspend fun changeProfile(mail : String, username : String, adress: String){
+        if(getUser()!!.email != mail){
+            SBobj.getClient1().gotrue.modifyUser(true) {
+                email = mail
+            }
+            Log.e("PROFILE", "mail changed")
+        }
+        if(getUsername() != username){
+            SBobj.getClient1().postgrest["user"].update({
+                UserInsert::username setTo  username
+            }) { UserInsert::profile_id eq getUser()!!.id }
+            Log.e("PROFILE", "username changed")
+        }
+        if(getHome()!!.adress != adress){
+            SBobj.getClient1().postgrest["home"].update({
+                Home::adress setTo adress
+            }) { Home::profile_id eq getUser()!!.id }
+            Log.e("PROFILE", "adress changed")
+        }
+        //SBobj.getClient1().gotrue.reauthenticate()
+        Log.e("PROFILE", "SAVED")
     }
 
     suspend fun addHome(user_id : String, adress : String){

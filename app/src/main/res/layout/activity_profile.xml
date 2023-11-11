@@ -123,7 +123,8 @@
             android:text="Сохранить"
             android:theme="@style/blue_btn"
             app:cornerRadius="12dp"
-            android:textSize="17sp" />
+            android:textSize="17sp"
+            android:onClick="save"/>
         <Button
             android:layout_below="@id/profile_save"
             android:id="@+id/profile_exit"
