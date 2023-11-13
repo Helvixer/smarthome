@@ -42,6 +42,7 @@ dependencies {
     implementation(platform("io.github.jan-tennert.supabase:bom:1.4.3"))
     implementation("io.github.jan-tennert.supabase:postgrest-kt")
     implementation("io.github.jan-tennert.supabase:realtime-kt")
+    implementation("io.github.jan-tennert.supabase:storage-kt")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
 
     implementation("io.ktor:ktor-client-cio:2.3.4")
