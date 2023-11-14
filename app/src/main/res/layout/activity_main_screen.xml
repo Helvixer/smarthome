@@ -42,15 +42,8 @@
         android:src="@drawable/btn_settings"
         android:onClick="setting"
         android:layout_alignParentEnd="true"/>
-    <ImageView
-        android:layout_marginBottom="40dp"
-        android:layout_marginEnd="20dp"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/btn_plus"
-        android:onClick="setting"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"/>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_below="@+id/kostyl"
         android:id="@+id/list"
@@ -58,5 +51,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         />
+    <ImageView
+        android:layout_marginBottom="40dp"
+        android:layout_marginEnd="20dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/btn_plus"
+        android:onClick="addR"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"/>
 
 </RelativeLayout>

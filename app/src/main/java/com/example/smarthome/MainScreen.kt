@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.room_adapter
 import com.example.smarthome.dataClasses.Room
 import com.example.smarthome.dataClasses.RoomList
-import com.example.smarthome.dataClasses.TestDec
 import com.example.smarthome.utils.SBobj
 import com.example.smarthome.utils.UserMethods
 import io.github.jan.supabase.postgrest.postgrest
@@ -66,7 +65,7 @@ class MainScreen : AppCompatActivity() {
                     var itemObj: JSONObject = room_array.getJSONObject(i)
                     var testType = itemObj.getJSONObject("r_types")
                     Log.e("", testType.toString())
-                    var img = SBobj.getClient1().storage["rooms"].downloadPublic(testType.getString("image"))
+                    var img = SBobj.getClient1().storage["test"].downloadPublic(testType.getString("image"))
                     var catalog: RoomList = RoomList(
                         itemObj.getString("name"),
                         img
@@ -80,6 +79,11 @@ class MainScreen : AppCompatActivity() {
         } catch (e: Exception){
             Log.e("ERROE", e.toString())
         }
+    }
+
+    fun addR(view: View) {
+        val intent = Intent(this, AddRoom::class.java)
+        startActivity(intent)
     }
 
 }

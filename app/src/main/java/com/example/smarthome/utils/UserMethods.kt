@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import com.example.smarthome.dataClasses.Home
 import com.example.smarthome.dataClasses.HomeInsert
+import com.example.smarthome.dataClasses.RoomInsert
 import com.example.smarthome.dataClasses.UserInsert
 import io.github.jan.supabase.gotrue.gotrue
 import io.github.jan.supabase.gotrue.providers.builtin.Email
@@ -76,6 +77,11 @@ class UserMethods {
         }catch (_:Exception){
             null
         }
+    }
+
+    suspend fun addRoom(r_type : Int, name : String){
+        val inser = RoomInsert(getHome()!!.home_id, name, r_type)
+        SBobj.getClient1().postgrest["rooms"].insert(inser)
     }
 
     suspend fun changeProfile(mail : String, username : String, adress: String){
