@@ -9,19 +9,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.smarthome.AddRoom
 import com.example.smarthome.R
+import com.example.smarthome.dataClasses.Room
 import com.example.smarthome.dataClasses.RoomList
-import com.example.smarthome.utils.SBobj
-import io.github.jan.supabase.storage.storage
 
 
-class room_adapter(private var RoomList: List<RoomList>) :
+class room_adapter(private var RoomList: List<RoomList>, private val onClickListener: OnClickListener) :
     RecyclerView.Adapter<room_adapter.MyViewHolder>() {
+
+
 
     inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         var name: TextView = itemView.findViewById(R.id.room_name)
         var image: ImageView = itemView.findViewById(R.id.room_image)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -37,6 +41,11 @@ class room_adapter(private var RoomList: List<RoomList>) :
         val bytes = bucket.downloadAuthenticated("test.png")*/
         val image1: Drawable = BitmapDrawable(BitmapFactory.decodeByteArray(api.icon, 0, api.icon.size))
         holder.image.setImageDrawable(image1)
+      //  holder.itemView.setOnClickListener()
+        holder.itemView.setOnClickListener(View.OnClickListener {
+            onClickListener.onClick(api)
+            Log.e("!", "!")
+        })
         //Log.e("!!!!!!ad", "wwfde")
     }
 
@@ -45,5 +54,10 @@ class room_adapter(private var RoomList: List<RoomList>) :
         return RoomList.size
     }
 
-
+    fun interface OnRoomClickListener{
+         fun onRoomClick(room: Room, position: Int)
+    }
+    class OnClickListener(val clickListener: (meme: RoomList) -> Unit) {
+        fun onClick(meme: RoomList) = clickListener(meme)
+    }
 }

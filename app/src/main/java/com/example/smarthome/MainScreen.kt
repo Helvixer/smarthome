@@ -7,10 +7,14 @@ import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.myapplication.room_adapter
 import com.example.smarthome.dataClasses.Room
 import com.example.smarthome.dataClasses.RoomList
@@ -34,12 +38,19 @@ class MainScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_screen)
         rooms = findViewById<RecyclerView>(R.id.list)
-        rooms!!.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rooms!!.layoutManager = GridLayoutManager(this, GridLayoutManager.VERTICAL)
+
+        /*room_adapter.onRoomClickListener : OnRoo =  room_adapter.OnRoomClickListener {
+            fun onRoomClick(room : Room){
+                Toast.makeText(this.applicationContext, room.name, Toast.LENGTH_SHORT).show()
+            }
+        }*/
+
         lifecycleScope.launch {
             findViewById<TextView>(R.id.main_adress).text = UserMethods().getHome()!!.adress
             val test = SBobj.getClient1().postgrest["rooms"]
                 .select(
-                    columns = Columns.raw("""name, r_types ( r_type_id, base_name, image )"""
+                    columns = Columns.raw("""rome_id, name, r_types ( r_type_id, base_name, image )"""
                     )
                 ){  Room::home_id eq UserMethods().getHome()!!.home_id }
             Log.e("roomtest", test.body.toString())
@@ -66,14 +77,23 @@ class MainScreen : AppCompatActivity() {
                     var testType = itemObj.getJSONObject("r_types")
                     Log.e("", testType.toString())
                     var img = SBobj.getClient1().storage["test"].downloadPublic(testType.getString("image"))
+                    var name : String
+                    if(itemObj.getString("name") == "null")
+                        name = testType.getString("base_name")
+                    else
+                        name = itemObj.getString("name")
                     var catalog: RoomList = RoomList(
-                        itemObj.getString("name"),
-                        img
+                        name,
+                        img,
+                        itemObj.getInt("rome_id")
                         )
                     roomItems += catalog
                 }
-                val adapter = room_adapter(roomItems)
+                val adapter = room_adapter(roomItems, room_adapter.OnClickListener{ room -> goRoom(room.id)})
                 rooms!!.adapter = adapter
+                /*rooms!!.setOnClickListener{
+
+                }*/
                 adapter.notifyDataSetChanged()
             }
         } catch (e: Exception){
@@ -81,9 +101,19 @@ class MainScreen : AppCompatActivity() {
         }
     }
 
+    fun goRoom(room_id : Int){
+/*        UserMethods().setSelectedRoom(room_id)
+        val int = Intent(this, )
+        startActivity(int)*/
+    }
+
     fun addR(view: View) {
         val intent = Intent(this, AddRoom::class.java)
         startActivity(intent)
     }
+
+    /*fun selectRoom(view: View) {
+        view.
+    }*/
 
 }

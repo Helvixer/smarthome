@@ -2,7 +2,8 @@ package com.example.smarthome.dataClasses
 
 import kotlinx.serialization.Serializable
 
-data class RoomInsert(val home_id : Int, val name : String, val r_type : Int)
+@Serializable
+data class RoomInsert(val home_id : Int, val name : String?, val r_type_id : Int)
 
 /*
 rome_id,
