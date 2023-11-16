@@ -17,7 +17,8 @@ object SBobj {
         install(Storage)
         //install other modules
     }
-        private set
+
+    var selected_room = 0
     fun getClient1(): SupabaseClient {
         return client
     }

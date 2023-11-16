@@ -26,6 +26,14 @@
         <item name="colorPrimary">@color/bluebut</item>
         <item name="cornerRadius">12dp</item>
     </style>
+    <style name="switch_da"
+        parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="track">@drawable/switch_test_track</item>
+        <item name="android:colorControlActivated">@color/bluebut</item>
+        <item name="android:thumb">@drawable/switch_test</item>
+        <item name="colorSwitchThumbNormal">@color/bluebut</item>
+        <item name="android:colorForeground">@color/gray</item>
+    </style>
     <style name="code_btn"
         parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorOnBackground">@color/invis</item>

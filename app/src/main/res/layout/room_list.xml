@@ -9,7 +9,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/border_edit"
     android:orientation="horizontal"
-    android:onClick="selectRoom"
     tools:context=".MainScreen">
 
 

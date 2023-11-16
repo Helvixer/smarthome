@@ -11,10 +11,9 @@ import io.github.jan.supabase.gotrue.gotrue
 import io.github.jan.supabase.gotrue.providers.builtin.Email
 import io.github.jan.supabase.gotrue.user.UserInfo
 import io.github.jan.supabase.postgrest.postgrest
+import kotlin.math.log
 
 class UserMethods {
-
-    private var selected_room = 0
 
     suspend fun Auth(mail : String, pass : String) : Boolean{
         try {
@@ -88,11 +87,13 @@ class UserMethods {
     }
 
     suspend fun getSelectedRoom() : Room{
-        return SBobj.getClient1().postgrest["rooms"].select() { Room::room_id eq selected_room }.decodeSingle<Room>()
+        val res = SBobj.getClient1().postgrest["rooms"].select() { Room::rome_id eq SBobj.selected_room }.decodeSingle<Room>()
+        Log.e("LOGGG", res.name)
+        return res
     }
 
     fun setSelectedRoom(room_id : Int){
-        selected_room = room_id
+        SBobj.selected_room = room_id
     }
 
     suspend fun changeProfile(mail : String, username : String, adress: String){

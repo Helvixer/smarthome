@@ -102,9 +102,11 @@ class MainScreen : AppCompatActivity() {
     }
 
     fun goRoom(room_id : Int){
-/*        UserMethods().setSelectedRoom(room_id)
-        val int = Intent(this, )
-        startActivity(int)*/
+        Log.e("ROOMID", room_id.toString())
+        UserMethods().setSelectedRoom(room_id)
+        Log.e("ROOMID", SBobj.selected_room.toString())
+        val int = Intent(this, DevicesList::class.java)
+        startActivity(int)
     }
 
     fun addR(view: View) {

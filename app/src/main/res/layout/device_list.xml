@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="176dp"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_weight="0.5"
+    android:layout_marginTop="15dp"
+    android:layout_marginStart="20dp"
+    android:background="@drawable/border_edit">
+
+    <ImageView
+        android:id="@+id/dv_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/light_blue1"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="10dp"/>
+    <TextView
+        android:id="@+id/dv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Свет"
+        android:textColor="@color/black"
+        android:layout_below="@id/dv_icon"
+        android:fontFamily="@font/montserrat_bold"
+        android:textSize="14sp"
+        android:layout_marginStart="15dp"/>
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/dv_power"
+        android:theme="@style/switch_da"
+        android:thumb="@drawable/switch_test"
+        app:track="@drawable/switch_test_track"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:checked="true"
+        android:layout_marginEnd="10dp"/>
+
+
+
+</RelativeLayout>
