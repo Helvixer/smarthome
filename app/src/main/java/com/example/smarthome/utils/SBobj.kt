@@ -19,6 +19,7 @@ object SBobj {
     }
 
     var selected_room = 0
+    var selected_device = 0
     fun getClient1(): SupabaseClient {
         return client
     }

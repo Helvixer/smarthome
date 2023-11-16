@@ -112,6 +112,7 @@ class MainScreen : AppCompatActivity() {
     fun addR(view: View) {
         val intent = Intent(this, AddRoom::class.java)
         startActivity(intent)
+        finish()
     }
 
     /*fun selectRoom(view: View) {

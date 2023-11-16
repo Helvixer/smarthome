@@ -34,6 +34,13 @@
         <item name="colorSwitchThumbNormal">@color/bluebut</item>
         <item name="android:colorForeground">@color/gray</item>
     </style>
+    <style name="slider"
+        parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="trackColorActive">@color/bluebut</item>
+        <item name="trackColorInactive">@color/gray</item>
+        <item name="thumbColor">@color/bluebut</item>
+        <item name="thumbRadius">5dp</item>
+    </style>
     <style name="code_btn"
         parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorOnBackground">@color/invis</item>

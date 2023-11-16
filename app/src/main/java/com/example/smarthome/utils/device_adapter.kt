@@ -7,7 +7,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import android.widget.ImageView
+import android.widget.Switch
 import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat.startActivity
@@ -19,7 +21,7 @@ import com.example.smarthome.dataClasses.Room
 import com.example.smarthome.dataClasses.RoomList
 
 
-class device_adapter(private var DeviceList: List<DeviceList>, private val onClickListener: OnClickListener) :
+class device_adapter(private var DeviceList: List<DeviceList>, private val onClickListener: OnClickListener, private val onCheckListener : OnCheckedEvent) :
     RecyclerView.Adapter<device_adapter.MyViewHolder>() {
 
 
@@ -46,7 +48,11 @@ class device_adapter(private var DeviceList: List<DeviceList>, private val onCli
       //  holder.itemView.setOnClickListener()
         holder.itemView.setOnClickListener(View.OnClickListener {
             onClickListener.onClick(api)
-            Log.e("!", "!")
+            Log.e("Click", "clicked")
+        })
+        holder.switch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { button, b ->
+            onCheckListener.checkListener(holder.switch)
+            Log.e("SWITCH", "SWITCH CHANGED")
         })
         //Log.e("!!!!!!ad", "wwfde")
     }
@@ -56,10 +62,11 @@ class device_adapter(private var DeviceList: List<DeviceList>, private val onCli
         return DeviceList.size
     }
 
-    fun interface OnRoomClickListener{
-         fun onRoomClick(room: Room, position: Int)
-    }
     class OnClickListener(val clickListener: (meme: DeviceList) -> Unit) {
         fun onClick(meme: DeviceList) = clickListener(meme)
+    }
+
+    class OnCheckedEvent(val checkListener : (meme : SwitchCompat) -> Unit){
+        fun onChangeSwitch(meme: SwitchCompat) = checkListener(meme)
     }
 }

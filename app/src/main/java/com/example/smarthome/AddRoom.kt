@@ -1,5 +1,6 @@
 package com.example.smarthome
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -21,11 +22,15 @@ class AddRoom : AppCompatActivity() {
     }
 
     fun back(view: View) {
+        val int = Intent(this, MainScreen::class.java)
+        startActivity(int)
         finish()
     }
     fun save(view: View) {
+        val int = Intent(this, MainScreen::class.java)
         lifecycleScope.launch {
             UserMethods().addRoom(select_type)
+            startActivity(int)
             finish()
         }
     }
