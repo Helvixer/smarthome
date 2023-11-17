@@ -26,6 +26,7 @@ class Profile : AppCompatActivity() {
     }
 
     fun back(view: View) {
+        startActivity(Intent(this, MainScreen::class.java))
         finish()
     }
 

@@ -39,6 +39,9 @@ class MainScreen : AppCompatActivity() {
         setContentView(R.layout.activity_main_screen)
         rooms = findViewById<RecyclerView>(R.id.list)
         rooms!!.layoutManager = GridLayoutManager(this, GridLayoutManager.VERTICAL)
+        /*val adressPattern : Regex = Regex("г\\. +[А-я]+, ул\\. +[А-я]+, д\\. +[0-9]+")
+        if(adressPattern.matches("г. Омск, ул. Ленина, 24"))
+            Log.e("TESTREGEX", "прошло")*/
 
         /*room_adapter.onRoomClickListener : OnRoo =  room_adapter.OnRoomClickListener {
             fun onRoomClick(room : Room){
